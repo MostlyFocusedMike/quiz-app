@@ -29,15 +29,16 @@ phil.scores.create(score: 0, topic: animals)
 # q1 = computers.questions.create(question: "q1", correct_answer: "c1", wrong1: "w1", wrong2: "w2", wrong3: "w3")
 # q2 = animals.questions.create(question: "q2", correct_answer: "c2", wrong1: "w4", wrong2: "w5", wrong3: "w6")
 
+5.times do
+  data = JSON.parse(RestClient.get('https://opentdb.com/api.php?amount=50&category=9&type=multiple'))["results"]
 
-data = JSON.parse(RestClient.get('https://opentdb.com/api.php?amount=20&category=9&type=multiple'))["results"]
-
-data.each do |question|
-  general.questions.create(
-    question: question["question"],
-    correct_answer: question["correct_answer"],
-    wrong1: question["incorrect_answers"][0],
-    wrong2: question["incorrect_answers"][1],
-    wrong3: question["incorrect_answers"][2]
-  )
+  data.each do |question|
+    general.questions.create(
+      question: question["question"],
+      correct_answer: question["correct_answer"],
+      wrong1: question["incorrect_answers"][0],
+      wrong2: question["incorrect_answers"][1],
+      wrong3: question["incorrect_answers"][2]
+    )
+  end
 end
