@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :users
   resources :topics, only: [:index, :show, :create]
   resources :questions, only: [:index, :create]
-  resources :scores, only: [:show, :create]
+  resources :scores, only: [:index, :show, :create]
 end
