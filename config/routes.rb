@@ -5,4 +5,9 @@ Rails.application.routes.draw do
     resources :questions, only: [:index]
   end
   resources :scores, only: [:index, :show, :create]
+  namespace :api do
+    namespace :v1 do
+      post '/login', to: 'auth#create'
+      get '/reauth', to: 'auth#show'
+    end
 end
