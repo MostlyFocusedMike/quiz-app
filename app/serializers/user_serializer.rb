@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def scores
     self.object.scores.map do |score|
-      {topic: score.topic.title, score: score.score}
+      {topic: score.topic.title, score: score.score, id: score.id}
     end
   end
 
