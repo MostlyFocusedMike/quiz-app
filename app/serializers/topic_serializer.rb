@@ -6,4 +6,5 @@ class TopicSerializer < ActiveModel::Serializer
       {user: score.user.name, score: score.score, id: score.id}
     end
   end
+
 end

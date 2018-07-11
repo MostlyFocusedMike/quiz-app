@@ -1,5 +1,5 @@
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :question, :answers
+  attributes :id, :question, :answers, :topic_id
 
   def answers
     arr = []
