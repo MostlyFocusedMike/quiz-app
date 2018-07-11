@@ -12,9 +12,9 @@ Score.destroy_all
 Topic.destroy_all
 Question.destroy_all
 
-tom = User.create(name: "tom", password: "1234")
-angelica = User.create(name: "angelica", password: "1234")
-phil = User.create(name: "phil", password: "1234")
+tom = User.create(username: "tom", password: "1234")
+angelica = User.create(username: "angelica", password: "1234")
+phil = User.create(username: "phil", password: "1234")
 
 general = Topic.create(title: "General", description: "Stuff and whatnot")
 history = Topic.create(title: "History", description: "It's pretty retro")
