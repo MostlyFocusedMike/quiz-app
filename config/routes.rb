@@ -10,4 +10,5 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#create'
       get '/reauth', to: 'auth#show'
     end
+  end
 end
