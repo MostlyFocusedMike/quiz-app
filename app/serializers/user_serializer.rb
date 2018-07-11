@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :scores
+  attributes :id, :username, :scores
 
   def scores
     self.object.scores.map do |score|
