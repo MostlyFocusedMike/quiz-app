@@ -1,24 +1,15 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update]
 
   def index
     render json: User.all
   end
 
   def show
-    render json: User.find(params[:id])
+    render json: @user
   end
 
   def create
-#     fetch("http://localhost:3000/users", {
-# 	method: "POST",
-#     headers: {
-#         "content-type": "application/json",
-#         "accept": "application/json"
-#     },
-#     body: JSON.stringify({user:{name: "Travis", password: "1234"}})
-# }).then(r => r.json()).then(console.log)
-# Promise {<pending>}
-# {id: 22, name: "Travis", scores: Array(0)}id: 22name: "Travis"scores: []__proto__: Object
     @user = User.create(user_params)
     if @user
       render json: @user
@@ -28,7 +19,12 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    if @user
+      @user.update(password: params[:password])
+      render json: { msg: "Password Updated!" }
+    else
+      render json: { msg: "There was an Error" }
+    end
   end
 
   def delete
@@ -39,5 +35,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end
