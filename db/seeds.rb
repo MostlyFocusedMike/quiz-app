@@ -31,25 +31,24 @@ phil.scores.create(score: 0, topic: history)
 # q2 = history.questions.create(question: "q2", correct_answer: "c2", wrong1: "w4", wrong2: "w5", wrong3: "w6")
 
 def makeQuestions(data_hash) 
-  data = data_hash[:data]
   topic = data_hash[:topic]
-  data.each do |question|
-    topic.questions.create(
-      question: question["question"],
-      correct_answer: question["correct_answer"],
-      wrong1: question["incorrect_answers"][0],
-      wrong2: question["incorrect_answers"][1],
-      wrong3: question["incorrect_answers"][2]
-    )
+  topic_questions = JSON.parse(RestClient.get("https://opentdb.com/api.php?amount=50&category=#{data_hash[:cat_num]}&type=multiple"))["results"]
+  topic_questions.each do |question|
+    if (topic.questions.none? {|db_q| db_q[:question] == question["question"]})
+      topic.questions.create(
+        question: question["question"],
+        correct_answer: question["correct_answer"],
+        wrong1: question["incorrect_answers"][0],
+        wrong2: question["incorrect_answers"][1],
+        wrong3: question["incorrect_answers"][2]
+      )
+    end 
   end
 end 
 2.times do
-  data_hash = [
-   {topic: general, data: JSON.parse(RestClient.get('https://opentdb.com/api.php?amount=50&category=9&type=multiple'))["results"]},
-   {topic: history, data: JSON.parse(RestClient.get('https://opentdb.com/api.php?amount=50&category=22&type=multiple'))["results"]},
-   {topic: film, data: JSON.parse(RestClient.get('https://opentdb.com/api.php?amount=50&category=11&type=multiple'))["results"]}
-  ]
-  data_hash.each do |data|
-    makeQuestions(data)
-  end 
+  [
+   {topic: general, cat_num: 9},
+   {topic: history, cat_num: 22},
+   {topic: film, cat_num: 11}
+  ].each { |data| makeQuestions(data) }
 end
