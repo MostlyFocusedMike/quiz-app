@@ -12,23 +12,37 @@ Score.destroy_all
 Topic.destroy_all
 Question.destroy_all
 
-tom = User.create(username: "tom", password: "1234")
-angelica = User.create(username: "angelica", password: "1234")
-phil = User.create(username: "phil", password: "1234")
+tom = User.create(username: "tom93", password: "1234")
+angelica = User.create(username: "12_angel", password: "1234")
+phil = User.create(username: "xxx_phil_xxx", password: "1234")
+greg = User.create(username: "the_g_man", password: "1234")
+arty = User.create(username: "the_artinator", password: "1234")
+patty = User.create(username: "miss_pancake", password: "1234")
+trogdor = User.create(username: "trog_the_burner", password: "1234")
+sarah = User.create(username: "sarah_smasher", password: "1234")
+caroline = User.create(username: "care_bear", password: "1234")
 
 general = Topic.create(title: "General", description: "If you want to get all 20, you'll need to know a little of everything")
 history = Topic.create(title: "History", description: "Events from ancient history to modern pop culture make this category tricky")
 film = Topic.create(title: "Film", description: "If you want to play this topic, ask yourself a question: \"Do I feel lucky?\"")
+tv = Topic.create(title: "TV", description: "All your binge watching has prepared you for this moment")
+computers = Topic.create(title: "Computers", description: "A topic for nerds, BY nerds")
 
-tom.scores.create(score: 1000, topic: general)
-angelica.scores.create(score: 7900, topic: general)
-phil.scores.create(score: 0, topic: general)
-tom.scores.create(score: 1000, topic: history)
-angelica.scores.create(score: 7900, topic: history)
-phil.scores.create(score: 0, topic: history)
-
-# q1 = computers.questions.create(question: "q1", correct_answer: "c1", wrong1: "w1", wrong2: "w2", wrong3: "w3")
-# q2 = history.questions.create(question: "q2", correct_answer: "c2", wrong1: "w4", wrong2: "w5", wrong3: "w6")
+tom.scores.create(score: 2300, topic: general)
+trogdor.scores.create(score: 2500, topic: general)
+phil.scores.create(score: 1200, topic: general)
+caroline.scores.create(score: 1000, topic: history)
+trogdor.scores.create(score: 3900, topic: history)
+patty.scores.create(score: 700, topic: history)
+arty.scores.create(score: 1000, topic: film)
+sarah.scores.create(score: 7900, topic: film)
+caroline.scores.create(score: 0, topic: film)
+greg.scores.create(score: 1000, topic: tv)
+angelica.scores.create(score: 7900, topic: tv)
+phil.scores.create(score: 0, topic: tv)
+tom.scores.create(score: 1000, topic: computers)
+patty.scores.create(score: 7900, topic: computers)
+caroline.scores.create(score: 0, topic: computers)
 
 def makeQuestions(data_hash) 
   topic = data_hash[:topic]
@@ -45,10 +59,13 @@ def makeQuestions(data_hash)
     end 
   end
 end 
+
 2.times do
   [
    {topic: general, cat_num: 9},
    {topic: history, cat_num: 22},
+   {topic: computers, cat_num: 18},
+   {topic: tv, cat_num: 14},
    {topic: film, cat_num: 11}
   ].each { |data| makeQuestions(data) }
 end
